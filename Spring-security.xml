@@ -1,0 +1,54 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="
+             http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd
+             http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Security configuration -->
+    <http auto-config="true">
+
+        <!-- Public API -->
+        <intercept-url pattern="/api/menu/**" access="permitAll"/>
+
+        <!-- Owner access -->
+        <intercept-url pattern="/owner/**" access="hasRole('OWNER')"/>
+
+        <!-- Outlet admin -->
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')"/>
+
+        <!-- Staff -->
+        <intercept-url pattern="/staff/**" access="hasRole('STAFF')"/>
+
+        <form-login login-page="/login"
+                    default-target-url="/dashboard"
+                    authentication-failure-url="/login?error=true"/>
+
+        <logout logout-success-url="/login?logout=true"/>
+
+    </http>
+
+    <!-- In-memory users (for testing) -->
+    <authentication-manager>
+
+        <authentication-provider>
+
+            <user-service>
+                <user name="owner"
+                      password="{noop}owner123"
+                      authorities="ROLE_OWNER"/>
+
+                <user name="admin"
+                      password="{noop}admin123"
+                      authorities="ROLE_ADMIN"/>
+
+                <user name="staff"
+                      password="{noop}staff123"
+                      authorities="ROLE_STAFF"/>
+            </user-service>
+
+        </authentication-provider>
+
+    </authentication-manager>
+
+</beans:beans>
