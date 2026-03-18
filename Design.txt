@@ -1,0 +1,17 @@
+Self-Billing Ordering System – High-Level Design
+Meshyog will onboard food outlet owners by creating an Admin user in the system.
+Admin user credentials will be shared with the food outlet owner.
+The Admin user can create multiple food outlets. However, each outlet will be activated only after uploading a valid license obtained from Meshyog.
+The Admin user can create new users with a Cashier role for their food outlets.
+Cashier users can be assigned to any of the Admin’s food outlets.
+User administration is completely managed by the food outlet owner (Admin user).
+Both Admin and Cashier users are responsible for managing the menu, including:
+Add
+Remove
+Update
+Enable / Disable
+The Admin user is able to:
+Generate reports
+View reports
+Send reports
+Download reports
